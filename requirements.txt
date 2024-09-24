@@ -1,0 +1,14 @@
+bitsandbytes
+torch
+peft
+transformers
+gradio
+streamlit
+huggingface_hub
+crewai
+langchain 
+langchain-community 
+langsmith 
+crewai-tools
+langchain_openai
+gradio
