@@ -1,0 +1,6 @@
+We are unable to launch any jupyter sessions with python 3.8.
+Every session launch results in a timeout with error message:
+
+"error: Engine exited with status 129."
+
+The issue started on Friday for the specific project "biomarker-data". We are able to start sessions in new projects, but unable to start the session in some existing projects using python 3.8.

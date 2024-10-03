@@ -1,0 +1,45 @@
+{
+    "case_id":"981492",
+    "customer_name":"FooPharmaceutical",
+    "customer_case_description":"We are unable to launch any jupyter sessions with python 3.8.\nEvery session launch results in a timeout with error message:\n\"error: Engine exited with status 129.\"\n\nThe issue started on Friday for the specific project \"biomarker-data\". We are able to start sessions in new projects, but unable to start the session in some existing projects using python 3.8.",
+    "status":"solved",
+    "comments":
+    [
+        {
+            "author":"pete_lion@FooPharmaceutical.com",
+            "text":"Can we  schedule a call asap to  look into the issue as its impacting many user workloads."
+        },  
+        {
+            "author":"pete_lion@FooPharmaceutical.com",
+            "text":"Some additional detail we are able to launch Jupyter session with python version 3.7 So it looks like only with python 3.8 we are getting a timeout."
+        },
+        {
+            "author":"audrey_hawk@cloudera.com",
+            "text":"This is Audrey from the Critical Incident Management team acknowledging your escalation request. I reviewed the case and understand that this issue has been affecting your development work and the end users are not able to spin any jupyter sessions. Kindly allow me some time as I am working on connecting with an engineer to check and update you on the case."
+        },
+        {
+            "author":"emma_giraffe@cloudera.com",
+            "text":"Thanks for contacting Cloudera Support. My name is Emma and I will be assisting you on the this case. Are you able to join a Screen Share Session so that we can quickly go through the issue?"
+        },
+        {
+            "author":"emma_giraffe@cloudera.com",
+            "text":"Summary of Screen Share Session:\n1. We checked the CML Project biomarker-data, it failed to launch a python3.8+jupyterLab session\n2.the session finally got timed out in less than 3 min.\n3.we started a new session of runtime workbench+python 3.8 for the same biomarker-data project, and it worked fine.\n4.we started a new session of runtime jupyter+python 3.8 in another new project, and it worked fine\n5.the issue seems to only happen to this particluar project + runtime image\nNext Steps:\n-we will review collected logs"
+        },
+        {
+            "author":"emma_giraffe@cloudera.com",
+            "text":"For the root cause investigation, could you please help with the below\n1) what are the packages installed in the project?\n2) what are the recently installed packages in the project\n3) was there any new package installation/configuration changes around the issue onset time window?\n4) are you using any custom runtime image?\nCan we go over these questions in a Zoom meeting?"
+        },
+        {
+            "author":"pete_lion@FooPharmaceutical.com",
+            "text":"Thank you so much for resolving the issue during the meeting we had. We are now able to launch Jupyter sessions successfully. Please add a summary of that call to this case when you can."
+        },
+        {
+            "author":"emma_giraffe@cloudera.com",
+            "text":"Root Cause: users manually installed custom versions of jupyter lab and ipython\nLong Term fix:remove the user-installed packages which are interfering with pre-installed packages or create a new project and only install packages that do not interfere with the pre-installed packages."
+        },
+        {
+            "author":"emma_giraffe@cloudera.com",
+            "text":"Closing this case and marking as solved."
+        }
+    ]
+}
