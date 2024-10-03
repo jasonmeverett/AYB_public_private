@@ -34,8 +34,43 @@ tasks:
     cpu: 2
     memory: 4
 
-    - type: start_application
-    name: Sample Agent Application - Case Summarizer
+  - type: create_model
+    name: Case Summarizer Backend
+    entity_label: case_summarizer_backend
+    description: This sample model API endpoint is used to generate support ticket intent
+    short_summary: Create the sample support ticket intent model api endpoint
+    access_key_environment_variable: CASE_SUMMARIZER_ACCESS_KEY
+    default_resources:
+      cpu: 2
+      memory: 4
+      gpu: 0
+    default_replication_policy:
+      type: fixed
+      num_replicas: 1
+
+  - type: build_model
+    name: Build Case Summarizer Backend
+    short_summary: Build Case Summarizer Backend
+    entity_label: case_summarizer_backend
+    comment: Build Case Summarizer Backend
+    examples:
+      - request:
+          case_id: "981492"
+        response: ""
+    target_file_path: sample_external_applications/case_summarizer_app/agent-backend/case_summarizer_backend.py
+    target_function_name: summarize_case
+
+  - type: deploy_model
+    name: case_summarizer_backend
+    short_summary: Deploy Case Summarizer Backend
+    entity_label: case_summarizer_backend
+    cpu: 2
+    memory: 4
+    gpu: 0
+  
+
+  - type: start_application
+    name: Sample Agent Application UI - Case Summarizer
     subdomain: case-summarizer
     script: sample_external_applications/case_summarizer_app/case_summarizer_app.py
     long_summary: Launching a case summarization app to be used by the Agentic workflow application 
