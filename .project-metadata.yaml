@@ -35,7 +35,7 @@ tasks:
     script: amp_1_session-install-deps/install-requirements.py
     short_summary: Install Dependencies
     kernel: python3
-    cpu: 2
+    cpu: 1
     memory: 4
 
   - type: create_model
@@ -45,7 +45,7 @@ tasks:
     short_summary: Create the Case Summarizer Backend endpoint
     access_key_environment_variable: CASE_SUMMARIZER_ACCESS_KEY
     default_resources:
-      cpu: 2
+      cpu: 1
       memory: 4
       gpu: 0
     default_replication_policy:
@@ -68,7 +68,7 @@ tasks:
     name: case_summarizer_backend
     short_summary: Deploy Case Summarizer Backend
     entity_label: case_summarizer_backend
-    cpu: 2
+    cpu: 1
     memory: 4
     gpu: 0
 
@@ -79,7 +79,7 @@ tasks:
     short_summary: Create the Case Lookup Backend endpoint
     access_key_environment_variable: CASE_LOOKUP_ACCESS_KEY
     default_resources:
-      cpu: 2
+      cpu: 1
       memory: 4
       gpu: 0
     default_replication_policy:
@@ -102,7 +102,7 @@ tasks:
     name: case_lookup_backend
     short_summary: Deploy Case Lookup Backend
     entity_label: case_lookup_backend
-    cpu: 2
+    cpu: 1
     memory: 4
     gpu: 0
   
@@ -112,8 +112,8 @@ tasks:
     subdomain: case-summarizer
     script: sample_external_applications/case_summarizer_app/agent-ui/case_summarizer_app.py
     long_summary: Launching a case summarization app to be used by the Agentic workflow application 
-    cpu: 2
-    memory: 8
+    cpu: 1
+    memory: 4
     environment_variables:
       TASK_TYPE: START_APPLICATION
 
@@ -122,17 +122,17 @@ tasks:
     subdomain: case-summarizer
     script: sample_external_applications/recent_support_cases_query_app/agent_app/support_cases_lookup_app.py
     long_summary: Launching a case lookup app to be used by the Agentic workflow application 
-    cpu: 2
-    memory: 8
+    cpu: 1
+    memory: 4
     environment_variables:
       TASK_TYPE: START_APPLICATION
 
-    - type: start_application
+  - type: start_application
     name: Agent Orchestrator
     subdomain: agent-orch
     script: agent-orchstrator-app.py
     long_summary: Launching main application with full agent orchestration.
-    cpu: 2
-    memory: 8
+    cpu: 1
+    memory: 4
     environment_variables:
       TASK_TYPE: START_APPLICATION
