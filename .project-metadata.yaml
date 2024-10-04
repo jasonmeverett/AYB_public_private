@@ -128,6 +128,16 @@ tasks:
       TASK_TYPE: START_APPLICATION
 
   - type: start_application
+    name: Sample Agent Application - Knowledge Graph
+    subdomain: case-summarizer
+    script: sample_external_applications/recent_support_cases_query_app/agent_app/support_cases_lookup_app.py
+    long_summary: Launching a case lookup app to be used by the Agentic workflow application 
+    cpu: 1
+    memory: 4
+    environment_variables:
+      TASK_TYPE: START_APPLICATION
+
+  - type: start_application
     name: Agent Orchestrator
     subdomain: agent-orch
     script: agent-orchstrator-app.py

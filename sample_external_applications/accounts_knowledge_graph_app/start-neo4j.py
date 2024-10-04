@@ -1,8 +1,7 @@
 import sys
 sys.path.insert(0, "/home/cdsw")
-sys.path.insert(0, "/home/cdsw/CML_AMP_Knowledge_Graph_Backed_RAG")
 
-from CML_AMP_Knowledge_Graph_Backed_RAG.utils.neo4j_utils import (
+from sample_external_applications.accounts_knowledge_graph_app.kg.neo4j_utils import (
     get_neo4j_credentails,
     is_neo4j_server_up,
     reset_neo4j_server,

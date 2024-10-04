@@ -3,3 +3,6 @@ crewai-tools
 gradio
 boto3
 botocore
+fastapi[standard]
+kubernetes
+neo4j
