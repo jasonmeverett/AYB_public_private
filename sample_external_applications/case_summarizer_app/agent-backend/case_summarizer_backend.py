@@ -28,4 +28,4 @@ def summarize_case(args):
         model = "anthropic.claude-3-5-sonnet-20240620-v1:0",
         messages = messages
     )
-    return (response['choices'][0]['message']['content'], case_data)
+    return (response['choices'][0]['message']['content'])

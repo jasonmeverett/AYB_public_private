@@ -1,0 +1,45 @@
+{
+    "case_id":"981389",
+    "customer_name":"Foo National Bank,",
+    "customer_case_description":"GPU Sessions timeout\nRecently we have added GPUs to our workspace, but are now unable to open new sessions. When we check this gpu node, we didnt find any high storage usage, or some other like high load in CPU/memory usage.",
+    "status":"solved",
+    "comments":
+    [
+        {
+            "author":"cory_capybara@cloudera.com",
+            "text":"Thanks for contacting our Cloudera Support. This is Cory and I will helping ypu on this case. Could you help collect below information on the failed session:\n1. Does this happen to all GPU sessions?\n2. Could you copy the session id from browser url and check the session pod status from kubernetes?\n3. Please collect a diag bundle from CDP console > Administration > Diagnostic Data."
+        },  
+        {
+            "author":"sandra_turtle@FooNationalBank.com",
+            "text":"1) This happen everytime we create the GPU session.\n2) The logs from session shows nothing\n3)We have uploaded diagnostic data to the case files here"
+        },
+        {
+            "author":"cory_capybara@cloudera.com",
+            "text":"Thanks for the update. From the pod status and describe output it seems all containers in the session pod is started. The main problem we're seeing is it fails to connect to livelog server: you can see this in the log output `Failed creating LiveLog client data = {err:dial tcp: i/o timeout}`. We may need to take a look at livelog-0 pod log in the ML namespace and also check the connectivity from the GPU nodes to livelog pod as you mentioned issue only happens to GPU pods.Will you be available to have a Zoom call to further discuss on this?"
+        },
+        {
+            "author":"cory_capybara@cloudera.com",
+            "text":"Before we get on a call, could you help check below which would help us get better understanding of the issue: 1. Test connectivity from host to livelog\n2. Test connectivity from pod to live log\nOn GPU pod and on a non-gpu pod"
+        },
+        {
+            "author":"cory_capybara@cloudera.com",
+            "text":"Thanks for your time on the call.\nAs you showed in earlier comment the GPU nodes are not able to connect to the livelog service. \nAfter some investigation we found a necessary proxy service is not running on your GPU nodes.When we check the proxy service the container is in Terminated status with reason unknown and exit code 255.\n Please restart the Cloudera Platform services on the affected GPU nodes and this should start the proxy service."
+        },
+        {
+            "author":"sandra_turtle@FooNationalBank.com",
+            "text":"We just restarted the proxy Platform and the proxy service pods are up but in pending status. When we check the pod describe, it says unable to attach or mount storage volumes."
+        },
+        {
+            "author":"cory_capybara@cloudera.com",
+            "text":"Please restart the storage management service as well as the GPU nodes, I see in your other recent support engagements that some work has been done to expand volumes, restarting the nodes may be necessary after that"
+        },
+        {
+            "author":"sandra_turtle@FooNationalBank.com",
+            "text":"We restarted all the mentioned services again and we think the create session with gpu is now working fine. We will close this case"
+        },
+        {
+            "author":"cory_capybara@cloudera.com",
+            "text":"Cause of the issue was determined to be failing proxy service on the gpu nodes. The proxy service pods were in error state and could not start due to pending storage mount resizing. Restarting the affected nodes fixed the proxy service. Therefore GPU sessions launched on those nodes can now connect to livelog and report status correctly."
+        }
+    ]
+}
