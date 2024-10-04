@@ -44,12 +44,11 @@ agent_1 = Agent(
     tools=[case_search_tool,
            cxgenius_case_summarizer],
     allow_delegation=False,
-    verbose=False,
-    max_iter=3,
-    max_rpm=1,
-    max_retry_limit=1,
-    max_retries=1,
-    llm=llm
+    max_iter=1,
+    max_retry_limit=3,
+    max_retries=3,
+    llm=llm,
+    verbose=True
 )
 
 # Task Definitions
