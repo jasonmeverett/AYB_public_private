@@ -19,6 +19,10 @@ environment_variables:
     default: "us-west-2"
     description: >-
       AWS region
+  AWS_BEDROCK_MODEL:
+    default:"anthropic.claude-3-5-sonnet-20240620-v1:0"
+    description: >-
+      AWS Bedrock model ID
 
 runtimes:
   - editor: PBJ Workbench
@@ -91,8 +95,8 @@ tasks:
       - request:
           account: "Main Street Bank"
         response: ""
-    target_file_path: sample_external_applications/case_summarizer_app/agent-backend/case_summarizer_backend.py
-    target_function_name: summarize_case
+    target_file_path: sample_external_applications/recent_support_cases_query_app/agent_backend/support_cases_lookup_backend.py
+    target_function_name: find_support_cases
 
   - type: deploy_model
     name: case_lookup_backend
@@ -118,6 +122,16 @@ tasks:
     subdomain: case-summarizer
     script: sample_external_applications/recent_support_cases_query_app/agent_app/support_cases_lookup_app.py
     long_summary: Launching a case lookup app to be used by the Agentic workflow application 
+    cpu: 2
+    memory: 8
+    environment_variables:
+      TASK_TYPE: START_APPLICATION
+
+    - type: start_application
+    name: Agent Orchestrator
+    subdomain: agent-orch
+    script: agent-orchstrator-app.py
+    long_summary: Launching main application with full agent orchestration.
     cpu: 2
     memory: 8
     environment_variables:

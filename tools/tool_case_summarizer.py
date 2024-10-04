@@ -3,7 +3,7 @@ import os
 import requests
 import json
 
-class ToolCaseLookup(BaseTool):
+class ToolCaseSummarizer(BaseTool):
     name: str = "CaseSummarizerTool"
     description: str = "Summarizes an entire support case engagement given the support case id."
       
@@ -24,6 +24,6 @@ class ToolCaseLookup(BaseTool):
 
     def _run(self, case_id: str) -> str:
         with open('/tmp/crew.log', 'w') as tools_log:
-          tools_log.write('## Using the *Recent Case Lookup Tool* for this request...\n')
+          tools_log.write('## Using the *Case Summarizer Tool* for this request...\n')
         response = self._fetch_summary(case_id)
         return response

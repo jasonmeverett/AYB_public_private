@@ -26,7 +26,7 @@ with gr.Blocks() as app:
     with gr.Row():
         with gr.Column():
             inp = gr.Textbox(label="Case ID",value="", lines=1)
-            examples = gr.Examples([["Foo National Bank"], ["Foo Pharmaceutical"]], inputs=[inp])
+            examples = gr.Examples([["Main Street Bank"], ["Foo Pharmaceutical"]], inputs=[inp])
             sum_btn = gr.Button("Submit")
 
         with gr.Column():

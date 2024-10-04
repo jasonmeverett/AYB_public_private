@@ -1,8 +1,7 @@
 import pandas as pd
 import cml.models_v1 as models
 
-#working_dir = "/home/cdsw"
-working_dir = "/Users/mecha_alex/work/code/CML_AMP_AYB"
+working_dir = "/home/cdsw"
 
 # This is a simple representation of what can be a more complex external tool. A larger dataset would utilize a real query engine and can be AI powered to handle Natural Language requests.
 
@@ -11,7 +10,9 @@ SUPPORT_CASES_DF = pd.read_csv(working_dir + '/sample_external_applications/rece
 
 # Search the support cases dataset and return a list in json form
 @models.cml_model
-def find_support_cases(account):
+def find_support_cases(args):
+    account = args["account"]
+
     # Process the search name for better results
     case_account = account.replace(" ", "")
 
@@ -21,5 +22,5 @@ def find_support_cases(account):
 
 
 # Run a simple test at startup to make sure things work
-testQuery = find_support_cases("Foo National Bank")
+testQuery = find_support_cases({"account":"Main Street Bank"})
 print(testQuery)

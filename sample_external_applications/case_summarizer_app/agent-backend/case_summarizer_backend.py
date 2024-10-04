@@ -5,14 +5,6 @@ import cml.models_v1 as models
 working_dir = "/home/cdsw"
 CASE_FILE_PATH_TMPL = '%s/sample_external_applications/case_summarizer_app/data/support_cases/case-%s.json'
 
-
-if os.getenv("AWS_ACCESS_KEY_ID") is None:
-    pass
-if os.getenv("AWS_SECRET_ACCESS_KEY") is None:
-    pass
-if os.getenv("AWS_REGION_NAME") is None:
-    pass
-
 @models.cml_model
 def summarize_case(args):
     case_id = args["case_id"]
@@ -27,7 +19,7 @@ def summarize_case(args):
         {"role": "user", "content": "%s"%case_data},
     ]
     response = completion(
-        model = "anthropic.claude-3-5-sonnet-20240620-v1:0",
+        model = os.getenv("AWS_BEDROCK_MODEL"),
         messages = messages
     )
     return (response['choices'][0]['message']['content'])

@@ -2,6 +2,7 @@ from crewai_tools import BaseTool
 import os
 import requests
 import json
+import time
 
 class ToolCaseLookup(BaseTool):
     name: str = "CaseLookupTool"
@@ -25,5 +26,6 @@ class ToolCaseLookup(BaseTool):
     def _run(self, customer: str) -> str:
         with open('/tmp/crew.log', 'w') as tools_log:
           tools_log.write('## Using the *Recent Case Lookup Tool* for this request...\n')
+        time.sleep(2)
         response = self._fetch_data(customer)
         return response
