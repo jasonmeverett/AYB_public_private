@@ -1,23 +1,14 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[89]:
-
 from crewai import Agent, Task, Crew, Process, LLM
-from langchain_openai import ChatOpenAI
 from textwrap import dedent
-import json
 import os
 import litellm
 litellm.set_verbose=False
-import openai
-from openai import OpenAI
-import httpx
 
-import sys
-llm = LLM(model="bedrock/" + os.getenv("AWS_BEDROCK_MODEL"))
+from pathlib import Path
 log_file = "/tmp/crew.log"
+Path(log_file).touch()
 
+llm = LLM(model="bedrock/" + os.getenv("AWS_BEDROCK_MODEL"))
 print("Importing available tools")
 import tools.tool_case_lookup as tool_case_lookup
 case_search_tool = tool_case_lookup.ToolCaseLookup()
@@ -43,7 +34,7 @@ agent_1 = Agent(
         """)), # Think of this as the job title
     backstory=dedent((
         """
-        You are simple support case lookup assistant, attempting to proivde information about CML Customers, their deployed workspaces and entitlements, and usage information within those workspaces.
+        You are an advanced Cloudera Customer Enablement assistant, attempting to proivde information about CML Customers, their deployed workspaces and entitlements, and usage information within those workspaces.
         This may include lookups of filed support cases, summaries of support cases, overall account consumption, workload consumption trends, and field information.
         """)), # This is the backstory of the agent, this helps the agent to understand the context of the task
     goal=dedent((
@@ -108,18 +99,17 @@ def crew_launch(req_input):
     )
     print("Setting req_input")
     inputs = {
-    "req_input": req_input,
+        "req_input": req_input,
     }
-
-def grep_tool_usage():
-  return
+    print("Kicking off crew")
+    result = crew.kickoff(inputs=inputs)
+    return result
   
 def read_logs():
     with open(log_file, "r") as f:
         return f.read()
 
 import gradio as gr
-from gradio_log import Log
 
 example=""
 print("Loading UI")
@@ -133,9 +123,9 @@ with gr.Blocks(theme='gradio/base') as demo:
         with gr.Column():
           inp = gr.Textbox(label="Question",value=example, lines=2)
           btn = gr.Button("Submit")
+          examples = gr.Examples([["Show me recent support cases for Evolve Pharma"]], inputs=[inp])
         with gr.Column():
           out = gr.Textbox(label="Result",max_lines=12)
-        #out = gr.Markdown(value="")
         btn.click(fn=crew_launch, inputs=inp, outputs=out)
     with gr.Row():
        with gr.Accordion("Agent Workflow Logging", open=False):
@@ -143,7 +133,7 @@ with gr.Blocks(theme='gradio/base') as demo:
 
     demo.load(read_logs, None, logs, every=1)
     
-    
+
 
 
 demo.launch(server_port=int(os.getenv("CDSW_APP_PORT")), server_name="127.0.0.1",  debug=True)
