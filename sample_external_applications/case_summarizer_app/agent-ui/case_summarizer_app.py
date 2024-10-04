@@ -33,7 +33,7 @@ with gr.Blocks() as app:
     with gr.Row():
         with gr.Column():
             inp = gr.Textbox(label="Case ID",value="", lines=1)
-            examples = gr.Examples([["981492"], ["981492"], ["981492"]], inputs=[inp])
+            examples = gr.Examples([["981492"], ["981389"]], inputs=[inp])
             sum_btn = gr.Button("Summarize")
 
         with gr.Column():

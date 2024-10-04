@@ -9,7 +9,7 @@ MODEL_SERVICE_URL = "https://modelservice." + os.getenv("CDSW_DOMAIN") + "/model
 
 def call_case_lookup(account_name):
     response = requests.post(MODEL_SERVICE_URL,
-                      data='{"request":{"case_id":"%s"}}' % account_name,
+                      data='{"request":{"account":"%s"}}' % account_name,
                       headers={'Content-Type': 'application/json', 'Authorization': 'Bearer %s' % os.getenv('CDSW_APIV2_KEY')})
     response_dict = response.json()
     if 'success' in response_dict:
@@ -26,7 +26,7 @@ with gr.Blocks() as app:
     with gr.Row():
         with gr.Column():
             inp = gr.Textbox(label="Case ID",value="", lines=1)
-            examples = gr.Examples([["Main Street Bank"], ["Foo Pharmaceutical"]], inputs=[inp])
+            examples = gr.Examples([["Main Street Bank"], ["Evolve Pharma"]], inputs=[inp])
             sum_btn = gr.Button("Submit")
 
         with gr.Column():
