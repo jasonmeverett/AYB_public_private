@@ -89,7 +89,7 @@ tasks:
     comment: Build Case Lookup Backend
     examples:
       - request:
-          account: "Foo National Bank"
+          account: "Main Street Bank"
         response: ""
     target_file_path: sample_external_applications/case_summarizer_app/agent-backend/case_summarizer_backend.py
     target_function_name: summarize_case
@@ -106,7 +106,7 @@ tasks:
   - type: start_application
     name: Sample Agent Application UI - Case Summarizer
     subdomain: case-summarizer
-    script: sample_external_applications/case_summarizer_app/case_summarizer_app.py
+    script: sample_external_applications/case_summarizer_app/agent-ui/case_summarizer_app.py
     long_summary: Launching a case summarization app to be used by the Agentic workflow application 
     cpu: 2
     memory: 8

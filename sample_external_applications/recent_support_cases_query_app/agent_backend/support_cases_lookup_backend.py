@@ -1,4 +1,5 @@
 import pandas as pd
+import cml.models_v1 as models
 
 #working_dir = "/home/cdsw"
 working_dir = "/Users/mecha_alex/work/code/CML_AMP_AYB"
@@ -9,6 +10,7 @@ working_dir = "/Users/mecha_alex/work/code/CML_AMP_AYB"
 SUPPORT_CASES_DF = pd.read_csv(working_dir + '/sample_external_applications/recent_support_cases_query_app/data/support_cases.csv')
 
 # Search the support cases dataset and return a list in json form
+@models.cml_model
 def find_support_cases(account):
     # Process the search name for better results
     case_account = account.replace(" ", "")

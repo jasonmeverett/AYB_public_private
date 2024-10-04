@@ -1,16 +1,16 @@
 {
     "case_id":"981492",
-    "customer_name":"FooPharmaceutical",
+    "customer_name":"EvolvePharma",
     "customer_case_description":"We are unable to launch any jupyter sessions with python 3.8.\nEvery session launch results in a timeout with error message:\n\"error: Engine exited with status 129.\"\n\nThe issue started on Friday for the specific project \"biomarker-data\". We are able to start sessions in new projects, but unable to start the session in some existing projects using python 3.8.",
     "status":"solved",
     "comments":
     [
         {
-            "author":"pete_lion@FooPharmaceutical.com",
+            "author":"pete_lion@EvolvePharma.com",
             "text":"Can we  schedule a call asap to  look into the issue as its impacting many user workloads."
         },  
         {
-            "author":"pete_lion@FooPharmaceutical.com",
+            "author":"pete_lion@EvolvePharma.com",
             "text":"Some additional detail we are able to launch Jupyter session with python version 3.7 So it looks like only with python 3.8 we are getting a timeout."
         },
         {
@@ -30,7 +30,7 @@
             "text":"For the root cause investigation, could you please help with the below\n1) what are the packages installed in the project?\n2) what are the recently installed packages in the project\n3) was there any new package installation/configuration changes around the issue onset time window?\n4) are you using any custom runtime image?\nCan we go over these questions in a Zoom meeting?"
         },
         {
-            "author":"pete_lion@FooPharmaceutical.com",
+            "author":"pete_lion@EvolvePharma.com",
             "text":"Thank you so much for resolving the issue during the meeting we had. We are now able to launch Jupyter sessions successfully. Please add a summary of that call to this case when you can."
         },
         {

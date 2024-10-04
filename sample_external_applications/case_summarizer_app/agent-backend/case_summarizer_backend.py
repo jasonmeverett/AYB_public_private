@@ -1,5 +1,6 @@
 import os
 from litellm import completion
+import cml.models_v1 as models
 
 working_dir = "/home/cdsw"
 CASE_FILE_PATH_TMPL = '%s/sample_external_applications/case_summarizer_app/data/support_cases/case-%s.json'
@@ -12,6 +13,7 @@ if os.getenv("AWS_SECRET_ACCESS_KEY") is None:
 if os.getenv("AWS_REGION_NAME") is None:
     pass
 
+@models.cml_model
 def summarize_case(args):
     case_id = args["case_id"]
     if os.path.isfile(CASE_FILE_PATH_TMPL % (working_dir, case_id)):

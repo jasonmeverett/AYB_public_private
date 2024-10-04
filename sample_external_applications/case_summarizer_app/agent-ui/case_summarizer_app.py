@@ -6,7 +6,7 @@ import json
 working_dir = "/home/cdsw"
 CASE_FILE_PATH_TMPL = '%s/sample_external_applications/case_summarizer_app/data/support_cases/case-%s.json'
 
-MODEL_SERVICE_URL = "https://modelservice." + os.getenv("CDSW_DOMAIN") + "/model?accessKey=" + os.getenv("TICKETING_MODEL_ACCESS_KEY")
+MODEL_SERVICE_URL = "https://modelservice." + os.getenv("CDSW_DOMAIN") + "/model?accessKey=" + os.getenv("CASE_SUMMARIZER_ACCESS_KEY")
 
 def call_summarize_case(case_id):
     if os.path.isfile(CASE_FILE_PATH_TMPL % (working_dir, case_id)):
