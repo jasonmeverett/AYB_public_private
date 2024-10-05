@@ -106,7 +106,6 @@ tasks:
     memory: 4
     gpu: 0
   
-
   - type: start_application
     name: Sample Agent Application UI - Case Summarizer
     subdomain: case-summarizer
@@ -128,9 +127,9 @@ tasks:
       TASK_TYPE: START_APPLICATION
 
   - type: start_application
-    name: Agent Orchestrator
-    subdomain: agent-orch
-    script: agent-orchstrator-app.py
+    name: AYA Chat Application
+    subdomain: aya-chat
+    script: aya-chat-app.py
     long_summary: Launching main application with full agent orchestration.
     cpu: 1
     memory: 4
