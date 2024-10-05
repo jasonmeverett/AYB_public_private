@@ -172,3 +172,17 @@ cython_debug/
 .ssh/
 .vscode-server/
 .wget-hsts
+.atuin/
+.bash-preexec.sh
+.bash_profile
+.bashrc
+.bashrc.omb-backup-*
+.config/
+.kube/
+.oh-my-bash/
+.osh-update
+.profile
+.sdirs
+.zshrc
+kubectl
+neo4j-volume/

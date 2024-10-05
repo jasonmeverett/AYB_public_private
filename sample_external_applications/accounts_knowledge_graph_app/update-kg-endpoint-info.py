@@ -5,6 +5,8 @@ import json
 import sys
 from typing import Dict
 
+from sample_external_applications.accounts_knowledge_graph_app.utils import update_project_envs
+
 if __name__ == "__main__":
     
     # Make the KG service IP address and port available as project-level 
@@ -17,15 +19,9 @@ if __name__ == "__main__":
     kg_address = sys.argv[1]
     kg_port = sys.argv[2]
     
-    proj: cmlapi.Project = cml.get_project(project_id)
-    proj_env: Dict = json.loads(proj.environment)
-    proj_env.update({
+    updated_envs = update_project_envs(cml, project_id=project_id, envs={
         "KG_APP_SERVICE_IP": kg_address,
         "KG_APP_SERVICE_PORT": kg_port
     })
     
-    updated_project: cmlapi.Project = cmlapi.Project(
-        environment= json.dumps(proj_env)
-    )
-    out: cmlapi.Project = cml.update_project(updated_project, project_id=project_id)
-    print(out.environment)
+    print(updated_envs)

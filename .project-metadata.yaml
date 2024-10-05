@@ -129,9 +129,9 @@ tasks:
 
   - type: start_application
     name: Sample Agent Application - Knowledge Graph
-    subdomain: case-summarizer
-    script: sample_external_applications/recent_support_cases_query_app/agent_app/support_cases_lookup_app.py
-    long_summary: Launching a case lookup app to be used by the Agentic workflow application 
+    subdomain: knowledge-graph
+    script: sample_external_applications/accounts_knowledge_graph_app/app-entrypoint.py
+    long_summary: Launching a knowledge graph tool to be used by the Agentic Workflow system
     cpu: 1
     memory: 4
     environment_variables:

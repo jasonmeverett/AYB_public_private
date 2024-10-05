@@ -6,3 +6,4 @@ botocore
 fastapi[standard]
 kubernetes
 neo4j
+uvicorn[standard]

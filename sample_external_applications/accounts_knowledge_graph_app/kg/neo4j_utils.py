@@ -157,16 +157,16 @@ def create_deployment_spec_for_neo4j():
                             name="neo4j-plugins",
                             empty_dir=client.V1EmptyDirVolumeSource(),
                         ),
-                        client.V1Volume(
-                            name="filesystem-access",
-                            empty_dir=client.V1EmptyDirVolumeSource(),
-                        ),
                         # client.V1Volume(
                         #     name="filesystem-access",
-                        #     persistent_volume_claim=client.V1PersistentVolumeClaimVolumeSource(
-                        #         claim_name=get_pvc_name_from_parent_pod()
-                        #     ),
+                        #     empty_dir=client.V1EmptyDirVolumeSource(),
                         # ),
+                        client.V1Volume(
+                            name="filesystem-access",
+                            persistent_volume_claim=client.V1PersistentVolumeClaimVolumeSource(
+                                claim_name=get_pvc_name_from_parent_pod()
+                            ),
+                        ),
                     ],
                 ),
             ),

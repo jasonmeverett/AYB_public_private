@@ -11,7 +11,7 @@ import sys
 sys.path.insert(0, "/home/cdsw")
 sys.path.insert(0, "/home/cdsw/CML_AMP_Knowledge_Graph_Backed_RAG")
 
-from CML_AMP_Knowledge_Graph_Backed_RAG.utils.neo4j_utils import (
+from sample_external_applications.accounts_knowledge_graph_app.kg.neo4j_utils import (
     get_neo4j_credentails,
     is_neo4j_server_up,
     reset_neo4j_server,
@@ -206,16 +206,17 @@ def clear_graph(graph: Neo4jGraph):
 
 
 def populate_database(graph: Neo4jGraph):
-    kg_data = json.load(open(os.path.join(os.getenv("HOME"), "kg_data.json")))
+    kg_data_file = "sample_external_applications/accounts_knowledge_graph_app/kg_data.json"
+    kg_data = json.load(open(os.path.join(os.getenv("HOME"), kg_data_file)))
     random.shuffle(kg_data)
     kg_data_with_cloud = list(filter(lambda x: x["public_cloud_cml_workspaces"], kg_data))
     
     # Clear out the existing graph
-    # print("Clearing existing graph...")
-    # clear_graph(graph)
+    print("Clearing existing graph...")
+    clear_graph(graph)
 
     idx0 = 0
-    idxf = 10000
+    idxf = 100
 
     stuff_to_add = kg_data_with_cloud + kg_data[idx0:idxf]
 
