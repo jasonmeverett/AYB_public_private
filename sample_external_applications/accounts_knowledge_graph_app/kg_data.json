@@ -1,0 +1,54 @@
+[
+    {
+      "id": "1",
+      "account_type": "Customer",
+      "industry": "Oil & Gas",
+      "account_name": "Some Gas Company",
+      "description": "The largest oil company in the world, but not really",
+      "geo": "AMER",
+      "region": "AMER",
+      "subregion": "LATAM",
+      "area": "LATAM SSA",
+      "account_team": [
+        {
+          "name": "My Guy",
+          "team_role": "Sales Engineer",
+          "email": "myguy@cloudera.com"
+        },
+        {
+          "name": "Some Dude",
+          "team_role": "Regional Vice President",
+          "email": "somedude@cloudera.com"
+        }
+      ],
+      "entitlements": [
+        {
+          "entitlement_name": "Some entitlement",
+          "entitlement_type": "Standard",
+          "entitlement_start_date": "2024-06-19",
+          "entitlement_end_date": "2025-06-18",
+          "status": "Active",
+          "product_type": "CDP Public Cloud",
+          "products": "CDP Public Cloud",
+          "unit_type": "Credits",
+          "unit_quantity": "5500.00"
+        }
+      ],
+      "public_cloud_cml_workspaces": [
+        {
+          "account_name": "Some Gas Company",
+          "cloud_provider": "AZURE",
+          "control_plane": "us-east-1",
+          "region": "eastus",
+          "workspace_name": "ml-dev",
+          "workspace_crn": "crn:cdp:some-workspace",
+          "workspace_version": "2.0.43-b233",
+          "support": "End of Support (EOS)",
+          "is_suspended": "False",
+          "last_consumption": "2024-09-05 06:14:04",
+          "last_upgrade_timestamp": "2024-03-06 23:16:55.414",
+          "current_status": "RENEW_FINISHED"
+        }
+      ]
+    }
+  ]

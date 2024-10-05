@@ -171,6 +171,16 @@ tasks:
       TASK_TYPE: START_APPLICATION
 
   - type: start_application
+    name: Sample Agent Application - Knowledge Graph
+    subdomain: knowledge-graph
+    script: sample_external_applications/accounts_knowledge_graph_app/app-entrypoint.py
+    long_summary: Launching a knowledge graph tool to be used by the Agentic Workflow system
+    cpu: 1
+    memory: 4
+    environment_variables:
+      TASK_TYPE: START_APPLICATION
+
+  - type: start_application
     name: AYA Chat Application
     subdomain: aya-chat
     script: aya-chat-app.py
