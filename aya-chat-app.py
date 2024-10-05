@@ -18,8 +18,8 @@ ticket_search_tool = tool_ticket_lookup.TicketListingTool()
 #import tools.cdvworkloadusage as cdvworkloadusage
 #workload_usage_tool = cdvworkloadusage.ToolCDVWorkloadUsageLookup()
 
-#import tools.old_cmlconsumption as old_cmlconsumption
-#cml_consumption_change_tool = old_cmlconsumption.ToolCMLConsumptionChange()
+import tools.tool_customer_consumption as tool_customer_consumption
+consumption_change_tool = tool_customer_consumption.ConsumptionMetricsTool()
 
 #import tools.old_edhknowledgegraph as old_edhknowledgegraph
 #edh_account_info_tool = old_edhknowledgegraph.ToolEnterpriseDataHubKnowledgeGraphSearch()
@@ -43,7 +43,8 @@ agent_1 = Agent(
         Perform the lookup task assigned to you by appropriate lookup tools and explain. Try to keep final answers in markdown format.
         """)), # This is the goal that the agent is trying to achieve
     tools=[ticket_search_tool,
-           case_summarizer_tool],
+           case_summarizer_tool,
+           consumption_change_tool],
     allow_delegation=False,
     max_iter=1,
     max_retry_limit=3,
@@ -133,8 +134,12 @@ def respond(request_id, message, chat_history):
 
 `%s`
 """
-    tool_usage_file = open("/tmp/%s" % request_id , "r")
-    agent_usage_message = agent_usage_template % tool_usage_file.read()
+    try:
+        tool_usage_file = open("/tmp/%s" % request_id , "r")
+        tool_usage_text = tool_usage_file.read()
+    except:
+        tool_usage_text = "Unknown Agent"
+    agent_usage_message = agent_usage_template % tool_usage_text
     chat_history.append((None, agent_usage_message))
     chat_history.append((None, bot_msg % (datetime.datetime.now().strftime('%H:%M'), str(crew_response))))
     return chat_history
