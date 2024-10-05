@@ -209,7 +209,7 @@ with gr.Blocks(css=css, theme=theme) as demo:
               examples_2 = gr.Examples([
                                           [1, {"text":"Show me the weekly average consumption changes for customers"}],
                                           [2, {"text":"Show me recent support cases for Evolve Pharma"}],
-                                          [3, {"text":"Summarize support case ID 981492"}],
+                                          [3, {"text":"Summarize support case ID 981492 in markdown"}],
                                           [4, {"text":"Who are the key personnel managing the customer Evolve Pharma"}],
                                       ],
                                       inputs=[example_num, input], elem_id="examples_table", label="")
@@ -217,7 +217,8 @@ with gr.Blocks(css=css, theme=theme) as demo:
             chatbot = gr.Chatbot(
                 value = startup_history,
                 avatar_images=["assets/person.png", "assets/chatbot.png"],
-                elem_id = "chatbot"
+                elem_id = "chatbot",
+                show_label = False
             )
             input.render()
             #clear = gr.ClearButton(scale = 1, components = [chatbot], value = "Clear History")
