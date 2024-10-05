@@ -9,7 +9,7 @@ class TicketListingTool(BaseTool):
     description: str = "Finds recent support tickets filed by the requested customer name"
       
     def _fetch_data(self, customer):
-      TOOL_API_URL = "https://modelservice." + os.getenv("CDSW_DOMAIN") + "/model?accessKey=" + os.getenv("CASE_LOOKUP_ACCESS_KEY")
+      TOOL_API_URL = "https://modelservice." + os.getenv("CDSW_DOMAIN") + "/model?accessKey=" + os.getenv("TICKET_QUERY_ACCESS_KEY")
 
       response = requests.post(TOOL_API_URL,
                       data='{"request":{"account":"%s"}}' % customer,
