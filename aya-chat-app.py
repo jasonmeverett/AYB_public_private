@@ -40,7 +40,7 @@ agent_1 = Agent(
         """)), # This is the backstory of the agent, this helps the agent to understand the context of the task
     goal=dedent((
         """
-        Perform the lookup task assigned to you by appropriate lookup tools and summarize the results found. Try to keep final answers in markdown format.
+        Perform the lookup task assigned to you by appropriate lookup tools and explain. Try to keep final answers in markdown format.
         """)), # This is the goal that the agent is trying to achieve
     tools=[ticket_search_tool,
            case_summarizer_tool],
@@ -69,7 +69,6 @@ task_1 = Task(
         Output should be a well formatted list or statement with the results of the user request.
         """)),
     agent=agent_1,
-    output_file=f'output-files/agent_1-output_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}.md'
 )
 
 def crew_launch(req_id, req_input):
@@ -102,24 +101,24 @@ print("Loading UI")
 import gradio as gr
 
 
-
-
-bot_msg = "### A.Y.A.\n%s"
-bot_msg = """<h3 style="text-align:left;">A.Y.A.</h5>\n%s"""
+bot_msg = """<strong style="text-align:left;">A.Y.A.</strong> - %s\n\n%s"""
 #human_msg="##### User\n%s"
-human_msg="""<h3 style="text-align:right;">User</h5>\n%s"""
+human_msg="""<p align="right">%s - <strong>User</strong></p>\n\n%s"""
 
-startup_history = [(None, bot_msg % "Hello, how can I help you today?")]
+startup_history = [(None, bot_msg % (datetime.datetime.now().strftime('%H:%M'), "Hello, how can I help you today?"))]
+
+
+
 
 def display_user_message(message, chat_history):
     request_id = str(uuid.uuid4())[:8]
     message_text = message["text"]
-    chat_history.append((human_msg % message_text, None))
+    chat_history.append((human_msg % (datetime.datetime.now().strftime('%H:%M'), message_text), None))
     return request_id, chat_history
 
 def display_thinking(chat_history):
     thinking_msg = """
-<h3 style="text-align:left;">🔄 Thinking...</h5>
+<h3 style="text-align:left;">🔄 Thinking...</h3>
 
 """
 
@@ -130,14 +129,14 @@ def respond(request_id, message, chat_history):
     crew_response = crew_launch(request_id, message)
     
     agent_usage_template = """
-<h3 style="text-align:left;">🛠️ Used the Agent...</h5>
+<h3 style="text-align:left;">🛠️ Calling Agent ...</h3>
 
 `%s`
 """
     tool_usage_file = open("/tmp/%s" % request_id , "r")
     agent_usage_message = agent_usage_template % tool_usage_file.read()
     chat_history.append((None, agent_usage_message))
-    chat_history.append((None, bot_msg % str(crew_response)))
+    chat_history.append((None, bot_msg % (datetime.datetime.now().strftime('%H:%M'), str(crew_response))))
     return chat_history
 
 def maybe_update_status(status, chat_history):
@@ -147,6 +146,8 @@ def maybe_update_status(status, chat_history):
 css = """
 footer{display:none !important}
 #examples_table {zoom: 75% !important;}
+#chatbot { flex-grow: 1 !important; overflow: auto !important;}
+#col { height: 80vh !important; }
 .info_md .container {
     border:1px solid #ccc; 
     border-radius:5px; 
@@ -158,24 +159,28 @@ footer{display:none !important}
 
 header_text = """
 # All Your Agents
-Meet **A.Y.A**, an Agentic Workflow Orchestrator which deciphers and send User requests to other domain-specific AI Agent-Tools.
+Meet **A.Y.A**, an Agentic Workflow Orchestrator which deciphers and sends User requests to domain specific AI Agents and Tools.
 """
 
 info_text = """
 <div class='container'> 
 
 ## Agent Applications A.Y.A. Can Use
-**Case Lookup App** [<sup>link</sup>](case-lookup-app.cai-workbench.com)
+**Ticket DB Query Agent** [<sup>link</sup>](case-lookup-app.cai-workbench.com)
                                
-App for looking up recent support cases for a customer.
+Queries a db for recent customer incident tickets.
 
-##### Case Lookup App [<sup>link</sup>](case-lookup-app.cai-workbench.com)
+##### Support Case Summarizer [<sup>link</sup>](case-lookup-app.cai-workbench.com)
                                
-App for looking up recent support cases for a customer.
+AI Summarization Agent for support case details and comments.
 
-##### Case Lookup App [<sup>link</sup>](case-lookup-app.cai-workbench.com)
+##### Consumption Metrics Agent [<sup>link</sup>](case-lookup-app.cai-workbench.com)
                                
-App for looking up recent support cases for a customer.
+Looks up recent trends in Customer Consumption.
+
+##### Account Personnel Registry [<sup>link</sup>](case-lookup-app.cai-workbench.com)
+                               
+Knowledge graph lookup of Customer Account Team personnel.
 </div>
 """
 
@@ -197,14 +202,14 @@ with gr.Blocks(css=css) as demo:
                                         [4, {"text":"Who are the key personnel managing the customer Evolve Pharma"}],
                                     ],
                                     inputs=[example_num, input], elem_id="examples_table")
-        with gr.Column(scale=15):
+        with gr.Column(scale=15, elem_id="col"):
             chatbot = gr.Chatbot(
                 value = startup_history,
                 avatar_images=["assets/person.png", "assets/chatbot.png"],
+                elem_id = "chatbot"
             )
-            with gr.Row(equal_height=True):
-                input.render()
-                #clear = gr.ClearButton(scale = 1, components = [chatbot], value = "Clear History")
+            input.render()
+            #clear = gr.ClearButton(scale = 1, components = [chatbot], value = "Clear History")
 
 
     user_msg = input.submit(display_user_message, [input, chatbot],  [request_id, chatbot])

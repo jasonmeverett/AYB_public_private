@@ -25,7 +25,7 @@ class TicketListingTool(BaseTool):
 
     def _run(self, request_id: str, customer: str) -> str:
         with open('/tmp/%s' % request_id, 'w') as tools_log:
-          tools_log.write('Tickets Lookup Tool')
+          tools_log.write('Ticket DB Query Agent')
         time.sleep(2)
         response = self._fetch_data(customer)
         return response
