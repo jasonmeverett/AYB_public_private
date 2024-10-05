@@ -4,9 +4,9 @@ import requests
 import json
 import time
 
-class ToolCaseLookup(BaseTool):
-    name: str = "CaseLookupTool"
-    description: str = "Finds recent support cases filed by the requested customer name"
+class TicketListingTool(BaseTool):
+    name: str = "TicketListingTool"
+    description: str = "Finds recent support tickets filed by the requested customer name"
       
     def _fetch_data(self, customer):
       TOOL_API_URL = "https://modelservice." + os.getenv("CDSW_DOMAIN") + "/model?accessKey=" + os.getenv("CASE_LOOKUP_ACCESS_KEY")
@@ -23,9 +23,9 @@ class ToolCaseLookup(BaseTool):
       else:
         return "ERROR: Check application logs"
 
-    def _run(self, customer: str) -> str:
-        with open('/tmp/crew.log', 'w') as tools_log:
-          tools_log.write('## Using the *Recent Case Lookup Tool* for this request...\n')
+    def _run(self, request_id: str, customer: str) -> str:
+        with open('/tmp/%s' % request_id, 'w') as tools_log:
+          tools_log.write('Tickets Lookup Tool')
         time.sleep(2)
         response = self._fetch_data(customer)
         return response
