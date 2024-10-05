@@ -180,7 +180,8 @@ tasks:
     environment_variables:
       TASK_TYPE: START_APPLICATION
 
-  - name: AYA Chat Application
+  - type: start_application
+    name: AYA Chat Application
     subdomain: aya-chat
     script: aya-chat-app.py
     long_summary: Launching main application with full agent orchestration.
