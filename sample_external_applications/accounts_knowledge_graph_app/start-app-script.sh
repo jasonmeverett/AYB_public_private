@@ -28,7 +28,15 @@ KG_APP_SERVICE_PORT=50051
 python sample_external_applications/accounts_knowledge_graph_app/update-kg-endpoint-info.py $KG_APP_SERVICE_IP $KG_APP_SERVICE_PORT
 
 # Serve the non-ui application endpoint. 
+<<<<<<< HEAD
 uvicorn sample_external_applications.accounts_knowledge_graph_app.serve:app --reload --port $KG_APP_SERVICE_PORT --host 0.0.0.0 & 
 
 # Port forward the neo4j browser
 python sample_external_applications/accounts_knowledge_graph_app/start-ui.py
+=======
+nohup fastapi dev sample_external_applications/accounts_knowledge_graph_app/serve.py --port $KG_APP_SERVICE_PORT &
+
+# For now, this is a workaround hack to keep the amp long living. Ideally, we'd be able to use start-neo4j.py script
+# to port forward the neo4j browser up to CDSW_APP_PORT using standard kubernetes functions in python.
+python sample_external_applications/case_summarizer_app/agent-ui/case_summarizer_app.py
+>>>>>>> 71ab9f7b8b3ecb2add17a129517bab439aa7e216
