@@ -166,19 +166,19 @@ info_text = """
 <div class='container'> 
 
 ## Agent Applications A.Y.A. Can Use
-**Ticket DB Query Agent** [<sup>link</sup>](case-lookup-app.cai-workbench.com)
+**📝 Ticket DB Query Agent** [<sup>link</sup>](case-lookup-app.cai-workbench.com)
                                
 Queries a db for recent customer incident tickets.
 
-##### Support Case Summarizer [<sup>link</sup>](case-lookup-app.cai-workbench.com)
+##### 📖 Support Case Summarizer [<sup>link</sup>](case-lookup-app.cai-workbench.com)
                                
 AI Summarization Agent for support case details and comments.
 
-##### Consumption Metrics Agent [<sup>link</sup>](case-lookup-app.cai-workbench.com)
+##### 📈 Consumption Metrics Agent [<sup>link</sup>](case-lookup-app.cai-workbench.com)
                                
 Looks up recent trends in Customer Consumption.
 
-##### Account Personnel Registry [<sup>link</sup>](case-lookup-app.cai-workbench.com)
+##### 👤 Account Personnel Registry [<sup>link</sup>](case-lookup-app.cai-workbench.com)
                                
 Knowledge graph lookup of Customer Account Team personnel.
 </div>
