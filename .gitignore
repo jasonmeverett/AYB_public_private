@@ -186,3 +186,4 @@ cython_debug/
 .zshrc
 kubectl
 neo4j-volume/
+.history/
