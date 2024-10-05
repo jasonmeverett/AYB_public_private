@@ -10,7 +10,7 @@ chmod +x kubectl
 # in the UI for this application
 
 # TODO: get neo4j server working on private cloud
-# python sample_external_applications/accounts_knowledge_graph_app/start-neo4j.py
+python sample_external_applications/accounts_knowledge_graph_app/start-neo4j.py
 
 # Populate the graph content.
 python sample_external_applications/accounts_knowledge_graph_app/kg/graphs.py
