@@ -73,11 +73,11 @@ tasks:
     gpu: 0
 
   - type: create_model
-    name: Case Lookup Backend
-    entity_label: case_lookup_backend
+    name: Support Ticket Query Backend
+    entity_label: ticket_query_backend
     description: This sample external application backend is used to query for recent support cases
-    short_summary: Create the Case Lookup Backend endpoint
-    access_key_environment_variable: CASE_LOOKUP_ACCESS_KEY
+    short_summary: Create the Ticket Query Backend endpoint
+    access_key_environment_variable: TICKET_QUERY_ACCESS_KEY
     default_resources:
       cpu: 1
       memory: 4
@@ -87,25 +87,68 @@ tasks:
       num_replicas: 1
 
   - type: build_model
-    name: Build Case Lookup Backend
-    short_summary: Build Case Lookup Backend
-    entity_label: case_lookup_backend
-    comment: Build Case Lookup Backend
+    name: Build Support Ticket Query Backend
+    short_summary: Build Ticket Query Backend
+    entity_label: ticket_query_backend
+    comment: Build Support Ticket Query Backend
     examples:
       - request:
           account: "Main Street Bank"
         response: ""
-    target_file_path: sample_external_applications/recent_support_cases_query_app/agent_backend/support_cases_lookup_backend.py
+    target_file_path: sample_external_applications/recent_support_tickets_query_app/agent_backend/support_tickets_query_backend.py
     target_function_name: find_support_cases
 
   - type: deploy_model
-    name: case_lookup_backend
-    short_summary: Deploy Case Lookup Backend
-    entity_label: case_lookup_backend
+    name: ticket_query_backend
+    short_summary: Deploy Support Ticket Query Backend
+    entity_label: ticket_query_backend
     cpu: 1
     memory: 4
     gpu: 0
-  
+
+  - type: create_model
+    name: Usage Consumption Trends Backend
+    entity_label: usage_consumption_backend
+    description: This sample external application backend is used to get recent customer consumption changes
+    short_summary: Create the Usage Consumption Trends Backend endpoint
+    access_key_environment_variable: USAGE_CONSUMPTION_ACCESS_KEY
+    default_resources:
+      cpu: 1
+      memory: 4
+      gpu: 0
+    default_replication_policy:
+      type: fixed
+      num_replicas: 1
+
+  - type: build_model
+    name: Usage Consumption Trends Backend
+    short_summary: Usage Consumption Trends Backend
+    entity_label: usage_consumption_backend
+    comment: Usage Consumption Trends Backend
+    examples:
+      - request:
+          prduct: "Cloduera Machine Learning"
+        response: ""
+    target_file_path: sample_external_applications/usage_consumption_query_app/agent_backend/usage_consumption_query_backend.py
+    target_function_name: get_consumption_trends
+
+  - type: deploy_model
+    name: usage_consumption_backend
+    short_summary: Deploy Usage Consumption Trends Backend
+    entity_label: usage_consumption_backend
+    cpu: 1
+    memory: 4
+    gpu: 0
+
+  - type: start_application
+    name: Sample Agent Application UI - Usage Consumption
+    subdomain: usage-consumption
+    script: sample_external_applications/usage_consumption_query_app/agent_app/usage_consumption_query_app.py
+    long_summary: Launching a case summarization app to be used by the Agentic workflow application 
+    cpu: 1
+    memory: 4
+    environment_variables:
+      TASK_TYPE: START_APPLICATION
 
   - type: start_application
     name: Sample Agent Application UI - Case Summarizer
@@ -118,10 +161,10 @@ tasks:
       TASK_TYPE: START_APPLICATION
 
   - type: start_application
-    name: Sample Agent Application UI - Case Lookup Tool
-    subdomain: case-summarizer
-    script: sample_external_applications/recent_support_cases_query_app/agent_app/support_cases_lookup_app.py
-    long_summary: Launching a case lookup app to be used by the Agentic workflow application 
+    name: Sample Agent Application UI - Ticket DB Query
+    subdomain: ticket-query
+    script: sample_external_applications/recent_support_tickets_query_app/agent_app/support_tickets_query_app.py
+    long_summary: Launching a Ticket DB Query app to be used by the Agentic workflow application 
     cpu: 1
     memory: 4
     environment_variables:
@@ -137,10 +180,9 @@ tasks:
     environment_variables:
       TASK_TYPE: START_APPLICATION
 
-  - type: start_application
-    name: Agent Orchestrator
-    subdomain: agent-orch
-    script: agent-orchstrator-app.py
+  - name: AYA Chat Application
+    subdomain: aya-chat
+    script: aya-chat-app.py
     long_summary: Launching main application with full agent orchestration.
     cpu: 1
     memory: 4

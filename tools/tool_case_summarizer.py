@@ -22,8 +22,8 @@ class ToolCaseSummarizer(BaseTool):
       else:
         return "ERROR: Check application logs"
 
-    def _run(self, case_id: str) -> str:
-        with open('/tmp/crew.log', 'w') as tools_log:
-          tools_log.write('## Using the *Case Summarizer Tool* for this request...\n')
+    def _run(self, request_id: str, case_id: str) -> str:
+        with open('/tmp/%s' % request_id, 'w') as tools_log:
+          tools_log.write('Support Case Summarizer')
         response = self._fetch_summary(case_id)
         return response
