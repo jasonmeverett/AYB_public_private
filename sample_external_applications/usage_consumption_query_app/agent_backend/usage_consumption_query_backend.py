@@ -1,7 +1,7 @@
 import pandas as pd
 import cml.models_v1 as models
 
-working_dir = "/home/cdsw"
+working_dir = "/home/cdsw/"
 # This is a simple representation of what can be a more complex external tool. A larger dataset would utilize a real query engine and can be AI powered to handle Natural Language requests.
 
 # Load a dataset containing recent consumption metrics

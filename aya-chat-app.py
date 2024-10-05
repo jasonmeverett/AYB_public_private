@@ -152,7 +152,7 @@ css = """
 footer{display:none !important}
 #examples_table {zoom: 70% !important;}
 #chatbot { flex-grow: 1 !important; overflow: auto !important;}
-#col { height: 80vh !important; }
+#col { height: 75vh !important; }
 .info_md .container {
     border:1px solid #ccc; 
     border-radius:5px; 
