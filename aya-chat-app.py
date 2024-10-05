@@ -195,13 +195,14 @@ with gr.Blocks(css=css) as demo:
         with gr.Column(scale=6):
             info = gr.Markdown(info_text, elem_classes=["info_md"])
             example_num = gr.Textbox(visible = False)
-            examples_2 = gr.Examples([
-                                        [1, {"text":"Show me the weekly average consumption changes for customers"}],
-                                        [2, {"text":"Show me recent support cases for Evolve Pharma"}],
-                                        [3, {"text":"Summarize support case ID 981492"}],
-                                        [4, {"text":"Who are the key personnel managing the customer Evolve Pharma"}],
-                                    ],
-                                    inputs=[example_num, input], elem_id="examples_table")
+            with gr.Accordion("Example User Inputs", open = False):
+              examples_2 = gr.Examples([
+                                          [1, {"text":"Show me the weekly average consumption changes for customers"}],
+                                          [2, {"text":"Show me recent support cases for Evolve Pharma"}],
+                                          [3, {"text":"Summarize support case ID 981492"}],
+                                          [4, {"text":"Who are the key personnel managing the customer Evolve Pharma"}],
+                                      ],
+                                      inputs=[example_num, input], elem_id="examples_table", label="")
         with gr.Column(scale=15, elem_id="col"):
             chatbot = gr.Chatbot(
                 value = startup_history,
