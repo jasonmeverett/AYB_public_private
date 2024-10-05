@@ -6,7 +6,7 @@ working_dir = "/home/cdsw"
 # This is a simple representation of what can be a more complex external tool. A larger dataset would utilize a real query engine and can be AI powered to handle Natural Language requests.
 
 # Load a dataset containing recent support cases
-SUPPORT_CASES_DF = pd.read_csv(working_dir + '/sample_external_applications/recent_support_cases_query_app/data/support_cases.csv')
+SUPPORT_CASES_DF = pd.read_csv(working_dir + '/sample_external_applications/recent_support_tickets_query_app/data/support_cases.csv')
 
 # Search the support cases dataset and return a list in json form
 @models.cml_model

@@ -76,7 +76,7 @@ tasks:
     name: Support Ticket Query Backend
     entity_label: ticket_query_backend
     description: This sample external application backend is used to query for recent support cases
-    short_summary: Create the Case Lookup Backend endpoint
+    short_summary: Create the Ticket Query Backend endpoint
     access_key_environment_variable: TICKET_QUERY_ACCESS_KEY
     default_resources:
       cpu: 1
@@ -88,7 +88,7 @@ tasks:
 
   - type: build_model
     name: Build Support Ticket Query Backend
-    short_summary: Build Case Lookup Backend
+    short_summary: Build Ticket Query Backend
     entity_label: ticket_query_backend
     comment: Build Support Ticket Query Backend
     examples:
@@ -110,7 +110,7 @@ tasks:
     name: Usage Consumption Trends Backend
     entity_label: usage_consumption_backend
     description: This sample external application backend is used to get recent customer consumption changes
-    short_summary: Create the Case Lookup Backend endpoint
+    short_summary: Create the Usage Consumption Trends Backend endpoint
     access_key_environment_variable: USAGE_CONSUMPTION_ACCESS_KEY
     default_resources:
       cpu: 1
@@ -134,7 +134,7 @@ tasks:
 
   - type: deploy_model
     name: usage_consumption_backend
-    short_summary: Deploy Case Lookup Backend
+    short_summary: Deploy Usage Consumption Trends Backend
     entity_label: usage_consumption_backend
     cpu: 1
     memory: 4
@@ -164,7 +164,7 @@ tasks:
     name: Sample Agent Application UI - Ticket DB Query
     subdomain: ticket-query
     script: sample_external_applications/recent_support_tickets_query_app/agent_app/support_tickets_query_app.py
-    long_summary: Launching a case lookup app to be used by the Agentic workflow application 
+    long_summary: Launching a Ticket DB Query app to be used by the Agentic workflow application 
     cpu: 1
     memory: 4
     environment_variables:

@@ -12,8 +12,8 @@ Path(log_file).touch()
 
 llm = LLM(model="bedrock/" + os.getenv("AWS_BEDROCK_MODEL"))
 print("Importing available tools")
-import tools.tool_ticket_lookup as tool_ticket_lookup
-ticket_search_tool = tool_ticket_lookup.TicketListingTool()
+import tools.tool_ticket_query as tool_ticket_query
+ticket_search_tool = tool_ticket_query.TicketListingTool()
 
 #import tools.cdvworkloadusage as cdvworkloadusage
 #workload_usage_tool = cdvworkloadusage.ToolCDVWorkloadUsageLookup()
@@ -150,7 +150,7 @@ def maybe_update_status(status, chat_history):
 
 css = """
 footer{display:none !important}
-#examples_table {zoom: 75% !important;}
+#examples_table {zoom: 70% !important;}
 #chatbot { flex-grow: 1 !important; overflow: auto !important;}
 #col { height: 80vh !important; }
 .info_md .container {
@@ -159,6 +159,7 @@ footer{display:none !important}
     min-height:300px;
     color: #666;
     padding: 10px;
+    background-color: whitesmoke;
 }
 """
 
@@ -189,10 +190,14 @@ Knowledge graph lookup of Customer Account Team personnel.
 </div>
 """
 
+theme = gr.themes.Base().set(
+    body_background_fill="url('file=/home/cdsw/assets/background.png') #FFFFFF no-repeat center bottom / 100svw auto padding-box fixed"
+)
+
 # Define this textbox outside of blocks so other components can refer to it, render it on the layout inside gr.Blocks
 input = gr.MultimodalTextbox(scale = 5, show_label = False, file_types = ["text"])
 
-with gr.Blocks(css=css) as demo:
+with gr.Blocks(css=css, theme=theme) as demo:
     request_id = gr.State("")
     with gr.Row():
         gr.Markdown(header_text)
@@ -224,4 +229,4 @@ with gr.Blocks(css=css) as demo:
 
 
 
-demo.launch(server_port=int(os.getenv("CDSW_APP_PORT")), server_name="127.0.0.1",  debug=True)
+demo.launch(server_port=int(os.getenv("CDSW_APP_PORT")), server_name="127.0.0.1",  debug=True, allowed_paths=["/home/cdsw/assets/background.png"])
